@@ -14,7 +14,6 @@
     <nav class="nav" :class="{ 'nav--scrolled': scrolled }" @scroll.window="scrolled = window.scrollY > 20">
         <div class="nav__container">
             <a href="#" class="nav__logo">
-                <span class="nav__logo-icon">N</span>
                 <span class="nav__logo-text">NexBit</span>
             </a>
 
@@ -24,8 +23,6 @@
                 <a href="#about" class="nav__link" @click="mobileMenuOpen = false">About</a>
                 <a href="#faq" class="nav__link" @click="mobileMenuOpen = false">FAQ</a>
             </div>
-
-            <a href="#waitlist" class="btn btn--primary nav__cta">Join Waitlist</a>
 
             <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
                 <span class="nav__toggle-bar"></span>
@@ -63,27 +60,7 @@
             <div class="hero__device">
                 <div class="device device--ipad">
                     <div class="device__screen">
-                        <div class="editor-mockup">
-                            <div class="editor-mockup__sidebar">
-                                <div class="editor-mockup__file"></div>
-                                <div class="editor-mockup__file editor-mockup__file--active"></div>
-                                <div class="editor-mockup__file"></div>
-                                <div class="editor-mockup__file"></div>
-                            </div>
-                            <div class="editor-mockup__main">
-                                <div class="editor-mockup__tabs">
-                                    <div class="editor-mockup__tab editor-mockup__tab--active"></div>
-                                    <div class="editor-mockup__tab"></div>
-                                </div>
-                                <div class="editor-mockup__code">
-                                    <div class="editor-mockup__line"><span class="code-keyword">func</span> <span class="code-func">greet</span>(<span class="code-param">name</span>: <span class="code-type">String</span>) {</div>
-                                    <div class="editor-mockup__line">    <span class="code-keyword">print</span>(<span class="code-string">"Hello, \(name)!"</span>)</div>
-                                    <div class="editor-mockup__line">}</div>
-                                    <div class="editor-mockup__line"></div>
-                                    <div class="editor-mockup__line"><span class="code-func">greet</span>(<span class="code-param">name</span>: <span class="code-string">"World"</span>)</div>
-                                </div>
-                            </div>
-                        </div>
+                        <img src="screenshot.png" alt="Codify IDE showing code editor with syntax highlighting, file browser, and AI assistant" class="device__screenshot">
                     </div>
                 </div>
             </div>
@@ -148,7 +125,7 @@
                             <path d="M11 8v6M8 11h6"/>
                         </svg>
                     </div>
-                    <h3 class="feature__title">LSP Support</h3>
+                    <h3 class="feature__title">Code Complete Support</h3>
                     <p class="feature__desc">Intelligent autocomplete, go-to-definition, find references, and real-time diagnostics.</p>
                 </div>
 
@@ -166,11 +143,12 @@
                 <div class="feature">
                     <div class="feature__icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                            <path d="M8 10h.01M12 10h.01M16 10h.01"/>
                         </svg>
                     </div>
-                    <h3 class="feature__title">iCloud Sync</h3>
-                    <p class="feature__desc">Your projects sync seamlessly across all your devices. Start on iPad, continue on iPhone.</p>
+                    <h3 class="feature__title">AI Assistant</h3>
+                    <p class="feature__desc">Built-in AI coding assistant. Get help with bugs, refactoring, and code explanations on demand.</p>
                 </div>
 
                 <div class="feature">
@@ -192,7 +170,7 @@
         <div class="container">
             <span class="section-label">Preview</span>
             <h2 class="section-title">See Codify in action</h2>
-            <p class="section-subtitle">A glimpse of what's coming. Professional tools, mobile-first design.</p>
+            <p class="section-subtitle">A glimpse of what's coming. Professional tools, AI-powered assistance, mobile-first design.</p>
 
             <div class="preview__tabs">
                 <button
@@ -210,6 +188,11 @@
                     :class="{ 'preview__tab--active': activePreview === 'git' }"
                     @click="activePreview = 'git'"
                 >Git</button>
+                <button
+                    class="preview__tab"
+                    :class="{ 'preview__tab--active': activePreview === 'ai' }"
+                    @click="activePreview = 'ai'"
+                >AI Agents</button>
             </div>
 
             <div class="preview__window">
@@ -219,27 +202,54 @@
                 <div class="preview__content" x-show="activePreview === 'editor'" x-transition>
                     <div class="preview-editor">
                         <div class="preview-editor__sidebar">
-                            <div class="preview-editor__folder">
-                                <span class="preview-editor__folder-icon">▼</span> my-project
+                            <div class="preview-editor__header">
+                                <span class="preview-editor__search-icon">🔍</span>
+                                <span>FILES</span>
                             </div>
-                            <div class="preview-editor__file preview-editor__file--nested">package.json</div>
-                            <div class="preview-editor__file preview-editor__file--nested preview-editor__file--active">index.ts</div>
-                            <div class="preview-editor__file preview-editor__file--nested">utils.ts</div>
-                            <div class="preview-editor__folder">
-                                <span class="preview-editor__folder-icon">▶</span> components
+                            <div class="preview-editor__tree">
+                                <div class="preview-editor__folder"><span class="folder-icon">▶</span> ci</div>
+                                <div class="preview-editor__folder"><span class="folder-icon">▶</span> cmake</div>
+                                <div class="preview-editor__folder"><span class="folder-icon">▶</span> deps</div>
+                                <div class="preview-editor__folder"><span class="folder-icon">▼</span> src</div>
+                                <div class="preview-editor__file preview-editor__file--nested preview-editor__file--active">apply.c</div>
+                                <div class="preview-editor__file preview-editor__file--nested">delta.h</div>
+                                <div class="preview-editor__file preview-editor__file--nested">attr_file.c</div>
+                                <div class="preview-editor__folder"><span class="folder-icon">▶</span> tests</div>
+                                <div class="preview-editor__folder"><span class="folder-icon">▶</span> include</div>
                             </div>
                         </div>
                         <div class="preview-editor__main">
-                            <div class="preview-editor__line"><span class="ln">1</span><span class="code-keyword">import</span> { serve } <span class="code-keyword">from</span> <span class="code-string">"@hono/node"</span>;</div>
-                            <div class="preview-editor__line"><span class="ln">2</span><span class="code-keyword">import</span> { Hono } <span class="code-keyword">from</span> <span class="code-string">"hono"</span>;</div>
-                            <div class="preview-editor__line"><span class="ln">3</span></div>
-                            <div class="preview-editor__line"><span class="ln">4</span><span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-keyword">new</span> <span class="code-type">Hono</span>();</div>
-                            <div class="preview-editor__line"><span class="ln">5</span></div>
-                            <div class="preview-editor__line"><span class="ln">6</span><span class="code-var">app</span>.<span class="code-func">get</span>(<span class="code-string">"/"</span>, (c) => {</div>
-                            <div class="preview-editor__line"><span class="ln">7</span>  <span class="code-keyword">return</span> c.<span class="code-func">text</span>(<span class="code-string">"Hello from Codify!"</span>);</div>
-                            <div class="preview-editor__line"><span class="ln">8</span>});</div>
-                            <div class="preview-editor__line"><span class="ln">9</span></div>
-                            <div class="preview-editor__line"><span class="ln">10</span><span class="code-func">serve</span>(<span class="code-var">app</span>);</div>
+                            <div class="preview-editor__tabs-bar">
+                                <div class="preview-editor__tab preview-editor__tab--active">apply.c</div>
+                                <div class="preview-editor__tab">delta.h</div>
+                                <div class="preview-editor__tab">attr_file.h</div>
+                                <div class="preview-editor__tab">CMakeLists.txt</div>
+                            </div>
+                            <div class="preview-editor__code">
+                                <div class="preview-editor__line"><span class="ln">64</span>    out->content = in;</div>
+                                <div class="preview-editor__line"><span class="ln">65</span>    out->content_len = in_len;</div>
+                                <div class="preview-editor__line"><span class="ln">66</span>    out->context_offset = in_offset;</div>
+                                <div class="preview-editor__line"><span class="ln">67</span></div>
+                                <div class="preview-editor__line"><span class="ln">68</span><span class="code-preproc">#define</span> <span class="code-macro">PATCH_IMAGE_INIT</span> ( GIT_POOL_INIT )</div>
+                                <div class="preview-editor__line"><span class="ln">69</span></div>
+                                <div class="preview-editor__line"><span class="ln">70</span><span class="code-keyword">static</span> <span class="code-type">int</span> <span class="code-func">patch_image_init_fromstr</span>(</div>
+                                <div class="preview-editor__line"><span class="ln">71</span>    patch_image *out, <span class="code-keyword">const</span> <span class="code-type">char</span> *in, <span class="code-type">size_t</span> in_len)</div>
+                                <div class="preview-editor__line"><span class="ln">72</span>{</div>
+                                <div class="preview-editor__line"><span class="ln">73</span>    <span class="code-type">git_diff_line</span> *line;</div>
+                            </div>
+                        </div>
+                        <div class="preview-editor__assistant">
+                            <div class="preview-editor__assistant-header">
+                                <span>Assistant</span>
+                                <span class="preview-editor__assistant-badge">AI</span>
+                            </div>
+                            <div class="preview-editor__assistant-body">
+                                <div class="assistant-start">
+                                    <div class="assistant-start__icon">💬</div>
+                                    <div class="assistant-start__text">Start a Conversation</div>
+                                    <div class="assistant-start__hint">Get help with bugs, or request refactoring.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -285,6 +295,33 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- AI Preview -->
+                <div class="preview__content" x-show="activePreview === 'ai'" x-transition x-cloak>
+                    <div class="preview-ai">
+                        <div class="preview-ai__header">
+                            <span class="preview-ai__title">AI Assistant</span>
+                            <span class="preview-ai__badge">Powered by Claude</span>
+                        </div>
+                        <div class="preview-ai__chat">
+                            <div class="preview-ai__message preview-ai__message--user">
+                                <div class="preview-ai__message-content">How do I fix this null pointer exception?</div>
+                            </div>
+                            <div class="preview-ai__message preview-ai__message--ai">
+                                <div class="preview-ai__message-content">The issue is on line 73 where you're accessing <code>user.name</code> without checking if <code>user</code> is null. Add a null check:<br><br><code>if (user != null) {<br>&nbsp;&nbsp;print(user.name);<br>}</code></div>
+                            </div>
+                            <div class="preview-ai__message preview-ai__message--user">
+                                <div class="preview-ai__message-content">Can you refactor this to use optional chaining?</div>
+                            </div>
+                            <div class="preview-ai__message preview-ai__message--ai">
+                                <div class="preview-ai__message-content">Sure! Here's the refactored version:<br><br><code>print(user?.name ?? "Guest")</code></div>
+                            </div>
+                        </div>
+                        <div class="preview-ai__input">
+                            <span class="preview-ai__input-text">Ask anything about your code...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -302,7 +339,7 @@
                     With iPads becoming more powerful each year and iPhones always within reach, there's no reason you can't review a pull request on the train, fix a bug from a coffee shop, or prototype an idea the moment inspiration strikes.
                 </p>
                 <p class="about__text">
-                    Codify isn't a code editor with compromises. It's a complete development environment with Git, terminal, LSP, and everything you need to be productive—wherever you are.
+                    Codify isn't a code editor with compromises. It's a complete development environment with Git, terminal, code complete, and everything you need to be productive—wherever you are. Made with kangaroos and drop bears in Australia.
                 </p>
             </div>
         </div>
@@ -336,10 +373,9 @@
             <div class="footer__top">
                 <div class="footer__brand">
                     <a href="#" class="nav__logo">
-                        <span class="nav__logo-icon">N</span>
-                        <span class="nav__logo-text">NexBit</span>
+                        <span class="nav__logo-text">NexBit Pty Ltd</span>
                     </a>
-                    <p class="footer__tagline">Building tools for the next generation of developers.</p>
+                    <p class="footer__tagline">Building tools for lightweight equipments.</p>
                 </div>
                 <div class="footer__links">
                     <a href="#features">Features</a>
@@ -349,7 +385,7 @@
                 </div>
             </div>
             <div class="footer__bottom">
-                <p>&copy; 2025 NexBit. All rights reserved.</p>
+                <p>&copy; 2025 NexBit Pty Ltd. All rights reserved. ABN 49693420763</p>
                 <div class="footer__legal">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
