@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codify - Professional IDE for iPad & iPhone | NexBit</title>
+    <meta name="description" content="Codify is a full-featured IDE for iPad and iPhone. Write code, manage Git repos, and build projects anywhere. Coming soon.">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body x-data="app">
+    <!-- Navigation -->
+    <nav class="nav" :class="{ 'nav--scrolled': scrolled }" @scroll.window="scrolled = window.scrollY > 20">
+        <div class="nav__container">
+            <a href="#" class="nav__logo">
+                <span class="nav__logo-icon">N</span>
+                <span class="nav__logo-text">NexBit</span>
+            </a>
+
+            <div class="nav__links" :class="{ 'nav__links--open': mobileMenuOpen }">
+                <a href="#features" class="nav__link" @click="mobileMenuOpen = false">Features</a>
+                <a href="#preview" class="nav__link" @click="mobileMenuOpen = false">Preview</a>
+                <a href="#about" class="nav__link" @click="mobileMenuOpen = false">About</a>
+                <a href="#faq" class="nav__link" @click="mobileMenuOpen = false">FAQ</a>
+            </div>
+
+            <a href="#waitlist" class="btn btn--primary nav__cta">Join Waitlist</a>
+
+            <button class="nav__toggle" @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle menu">
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="waitlist">
+        <div class="container">
+            <span class="badge">Coming Soon</span>
+            <h1 class="hero__title">Code Anywhere.<br>Build Everything.</h1>
+            <p class="hero__subtitle">A professional-grade IDE designed for iPad and iPhone. Write, debug, and ship code from anywhere in the world.</p>
+
+            <form class="hero__form" @submit.prevent="submitWaitlist" x-show="!waitlistSubmitted">
+                <input
+                    type="email"
+                    class="hero__input"
+                    placeholder="Enter your email"
+                    x-model="email"
+                    required
+                >
+                <button type="submit" class="btn btn--primary">
+                    <span x-show="!submitting">Get Early Access</span>
+                    <span x-show="submitting">Joining...</span>
+                </button>
+            </form>
+            <p class="hero__success" x-show="waitlistSubmitted" x-cloak>
+                Thanks for joining! We'll notify you when Codify launches.
+            </p>
+
+            <!-- Device Mockup -->
+            <div class="hero__device">
+                <div class="device device--ipad">
+                    <div class="device__screen">
+                        <div class="editor-mockup">
+                            <div class="editor-mockup__sidebar">
+                                <div class="editor-mockup__file"></div>
+                                <div class="editor-mockup__file editor-mockup__file--active"></div>
+                                <div class="editor-mockup__file"></div>
+                                <div class="editor-mockup__file"></div>
+                            </div>
+                            <div class="editor-mockup__main">
+                                <div class="editor-mockup__tabs">
+                                    <div class="editor-mockup__tab editor-mockup__tab--active"></div>
+                                    <div class="editor-mockup__tab"></div>
+                                </div>
+                                <div class="editor-mockup__code">
+                                    <div class="editor-mockup__line"><span class="code-keyword">func</span> <span class="code-func">greet</span>(<span class="code-param">name</span>: <span class="code-type">String</span>) {</div>
+                                    <div class="editor-mockup__line">    <span class="code-keyword">print</span>(<span class="code-string">"Hello, \(name)!"</span>)</div>
+                                    <div class="editor-mockup__line">}</div>
+                                    <div class="editor-mockup__line"></div>
+                                    <div class="editor-mockup__line"><span class="code-func">greet</span>(<span class="code-param">name</span>: <span class="code-string">"World"</span>)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <span class="section-label">Features</span>
+            <h2 class="section-title">Everything you need to code on the go</h2>
+            <p class="section-subtitle">Codify brings desktop-class development tools to your iPad and iPhone, without compromise.</p>
+
+            <div class="features__grid">
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">Syntax Highlighting</h3>
+                    <p class="feature__desc">Beautiful, accurate highlighting for 50+ programming languages with customizable themes.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="4"/>
+                            <path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">Git Integration</h3>
+                    <p class="feature__desc">Clone, commit, push, pull, and manage branches. Full version control at your fingertips.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">File Browser</h3>
+                    <p class="feature__desc">Navigate your entire project with ease. Quick search, file operations, and tree view.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M6 8l4 4-4 4M12 16h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">Integrated Terminal</h3>
+                    <p class="feature__desc">Full shell access with support for common dev tools. Run scripts and commands directly.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                            <path d="M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">LSP Support</h3>
+                    <p class="feature__desc">Intelligent autocomplete, go-to-definition, find references, and real-time diagnostics.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="18" rx="2"/>
+                            <path d="M12 3v18M2 12h20"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">Split Views</h3>
+                    <p class="feature__desc">Work on multiple files side by side. Maximize productivity on iPad's large display.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">iCloud Sync</h3>
+                    <p class="feature__desc">Your projects sync seamlessly across all your devices. Start on iPad, continue on iPhone.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M6 8h.01M10 8h.01M14 8h8"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature__title">Keyboard Shortcuts</h3>
+                    <p class="feature__desc">Full external keyboard support with customizable shortcuts. Code as fast as on desktop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Section -->
+    <section class="preview" id="preview">
+        <div class="container">
+            <span class="section-label">Preview</span>
+            <h2 class="section-title">See Codify in action</h2>
+            <p class="section-subtitle">A glimpse of what's coming. Professional tools, mobile-first design.</p>
+
+            <div class="preview__tabs">
+                <button
+                    class="preview__tab"
+                    :class="{ 'preview__tab--active': activePreview === 'editor' }"
+                    @click="activePreview = 'editor'"
+                >Editor</button>
+                <button
+                    class="preview__tab"
+                    :class="{ 'preview__tab--active': activePreview === 'terminal' }"
+                    @click="activePreview = 'terminal'"
+                >Terminal</button>
+                <button
+                    class="preview__tab"
+                    :class="{ 'preview__tab--active': activePreview === 'git' }"
+                    @click="activePreview = 'git'"
+                >Git</button>
+            </div>
+
+            <div class="preview__window">
+                <div class="preview__badge">Under Development</div>
+
+                <!-- Editor Preview -->
+                <div class="preview__content" x-show="activePreview === 'editor'" x-transition>
+                    <div class="preview-editor">
+                        <div class="preview-editor__sidebar">
+                            <div class="preview-editor__folder">
+                                <span class="preview-editor__folder-icon">▼</span> my-project
+                            </div>
+                            <div class="preview-editor__file preview-editor__file--nested">package.json</div>
+                            <div class="preview-editor__file preview-editor__file--nested preview-editor__file--active">index.ts</div>
+                            <div class="preview-editor__file preview-editor__file--nested">utils.ts</div>
+                            <div class="preview-editor__folder">
+                                <span class="preview-editor__folder-icon">▶</span> components
+                            </div>
+                        </div>
+                        <div class="preview-editor__main">
+                            <div class="preview-editor__line"><span class="ln">1</span><span class="code-keyword">import</span> { serve } <span class="code-keyword">from</span> <span class="code-string">"@hono/node"</span>;</div>
+                            <div class="preview-editor__line"><span class="ln">2</span><span class="code-keyword">import</span> { Hono } <span class="code-keyword">from</span> <span class="code-string">"hono"</span>;</div>
+                            <div class="preview-editor__line"><span class="ln">3</span></div>
+                            <div class="preview-editor__line"><span class="ln">4</span><span class="code-keyword">const</span> <span class="code-var">app</span> = <span class="code-keyword">new</span> <span class="code-type">Hono</span>();</div>
+                            <div class="preview-editor__line"><span class="ln">5</span></div>
+                            <div class="preview-editor__line"><span class="ln">6</span><span class="code-var">app</span>.<span class="code-func">get</span>(<span class="code-string">"/"</span>, (c) => {</div>
+                            <div class="preview-editor__line"><span class="ln">7</span>  <span class="code-keyword">return</span> c.<span class="code-func">text</span>(<span class="code-string">"Hello from Codify!"</span>);</div>
+                            <div class="preview-editor__line"><span class="ln">8</span>});</div>
+                            <div class="preview-editor__line"><span class="ln">9</span></div>
+                            <div class="preview-editor__line"><span class="ln">10</span><span class="code-func">serve</span>(<span class="code-var">app</span>);</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal Preview -->
+                <div class="preview__content" x-show="activePreview === 'terminal'" x-transition x-cloak>
+                    <div class="preview-terminal">
+                        <div class="preview-terminal__header">
+                            <span class="preview-terminal__dot preview-terminal__dot--red"></span>
+                            <span class="preview-terminal__dot preview-terminal__dot--yellow"></span>
+                            <span class="preview-terminal__dot preview-terminal__dot--green"></span>
+                            <span class="preview-terminal__title">Terminal</span>
+                        </div>
+                        <div class="preview-terminal__body">
+                            <div class="preview-terminal__line"><span class="term-prompt">~/my-project $</span> npm run dev</div>
+                            <div class="preview-terminal__line term-output">Starting development server...</div>
+                            <div class="preview-terminal__line term-output term-success">✓ Server running at http://localhost:3000</div>
+                            <div class="preview-terminal__line term-output">Watching for file changes...</div>
+                            <div class="preview-terminal__line"><span class="term-prompt">~/my-project $</span> <span class="term-cursor">▋</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Git Preview -->
+                <div class="preview__content" x-show="activePreview === 'git'" x-transition x-cloak>
+                    <div class="preview-git">
+                        <div class="preview-git__header">
+                            <span class="preview-git__branch">main</span>
+                            <span class="preview-git__status">↑2 ↓0</span>
+                        </div>
+                        <div class="preview-git__section">
+                            <div class="preview-git__section-title">Staged Changes (2)</div>
+                            <div class="preview-git__file preview-git__file--added">A  components/Button.tsx</div>
+                            <div class="preview-git__file preview-git__file--modified">M  index.ts</div>
+                        </div>
+                        <div class="preview-git__section">
+                            <div class="preview-git__section-title">Changes (1)</div>
+                            <div class="preview-git__file preview-git__file--modified">M  utils.ts</div>
+                        </div>
+                        <div class="preview-git__actions">
+                            <button class="preview-git__btn">Commit</button>
+                            <button class="preview-git__btn preview-git__btn--secondary">Push</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about__content">
+                <span class="section-label">About</span>
+                <h2 class="section-title">Built for developers, by developers</h2>
+                <p class="about__text">
+                    We believe professional software development shouldn't be limited to desktop computers. Codify is our answer to the question: what if you could have a full IDE in your pocket?
+                </p>
+                <p class="about__text">
+                    With iPads becoming more powerful each year and iPhones always within reach, there's no reason you can't review a pull request on the train, fix a bug from a coffee shop, or prototype an idea the moment inspiration strikes.
+                </p>
+                <p class="about__text">
+                    Codify isn't a code editor with compromises. It's a complete development environment with Git, terminal, LSP, and everything you need to be productive—wherever you are.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <span class="section-label">FAQ</span>
+            <h2 class="section-title">Frequently asked questions</h2>
+
+            <div class="faq__list">
+                <template x-for="(item, index) in faqs" :key="index">
+                    <div class="faq__item" :class="{ 'faq__item--open': openFaq === index }">
+                        <button class="faq__question" @click="openFaq = openFaq === index ? null : index">
+                            <span x-text="item.q"></span>
+                            <span class="faq__icon">+</span>
+                        </button>
+                        <div class="faq__answer" x-show="openFaq === index" x-collapse x-cloak>
+                            <p x-text="item.a"></p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <a href="#" class="nav__logo">
+                        <span class="nav__logo-icon">N</span>
+                        <span class="nav__logo-text">NexBit</span>
+                    </a>
+                    <p class="footer__tagline">Building tools for the next generation of developers.</p>
+                </div>
+                <div class="footer__links">
+                    <a href="#features">Features</a>
+                    <a href="#preview">Preview</a>
+                    <a href="#about">About</a>
+                    <a href="#faq">FAQ</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 NexBit. All rights reserved.</p>
+                <div class="footer__legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

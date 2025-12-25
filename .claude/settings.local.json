@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/zach/Develop/NomadLinkProjects/nexbitWeb log --oneline -10)",
+      "Bash(git -C /Users/zach/Develop/NomadLinkProjects/nexbitWeb ls-files:*)",
+      "Bash(git -C /Users/zach/Develop/NomadLinkProjects/nexbitWeb log --all --oneline)"
+    ]
+  }
+}
